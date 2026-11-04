@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divine Ideas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #b8860b;
+  --gold-light: #d4a843;
+  --gold-soft: #f5e6c4;
+  --gold-bg: #fdf8ef;
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --text: #2c2416;
+  --text-secondary: #6b5d4d;
+  --text-muted: #9a8d7e;
+  --border: #e8e0d4;
+  --border-light: #f0ebe3;
+  --danger: #c0392b;
+  --danger-hover: #a93226;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(44,36,22,0.06), 0 1px 2px rgba(44,36,22,0.04);
+  --shadow-md: 0 4px 12px rgba(44,36,22,0.08), 0 2px 4px rgba(44,36,22,0.04);
+  --shadow-lg: 0 12px 32px rgba(44,36,22,0.12), 0 4px 8px rgba(44,36,22,0.06);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 16px;
+  text-align: center;
+}
+.header h1 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.header h1 span {
+  color: var(--gold);
+}
+.header p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+.header-stats {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.header-stats strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Main layout */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.search-input {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 14px 10px 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239a8d7e' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.868-3.834zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 3px rgba(184,134,11,0.1);
+}
+.filter-select {
+  padding: 10px 32px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239a8d7e' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 0.2s;
+}
+.filter-select:focus {
+  outline: none;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 3px rgba(184,134,11,0.1);
+}
+.btn-new {
+  padding: 10px 20px;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.btn-new:hover { background: var(--gold-light); }
+.btn-new:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Cards */
+.ideas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.idea-card {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  box-shadow: var(--shadow);
+}
+.idea-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+.idea-card.expanded {
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold-soft);
+}
+.idea-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.idea-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  flex: 1;
+}
+.idea-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.category-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.category-badge[data-cat="Social Media"] { background: #e8f4fd; color: #1a6fa3; }
+.category-badge[data-cat="YouTube Videos"] { background: #fde8e8; color: #a31a1a; }
+.category-badge[data-cat="Bible Reading"] { background: #e8f5e8; color: #1a7a2e; }
+.category-badge[data-cat="Songs/Music"] { background: #f3e8fd; color: #6b1aa3; }
+.category-badge[data-cat="Ministry"] { background: var(--gold-bg); color: var(--gold); }
+.category-badge[data-cat="Other"] { background: #f0ebe3; color: var(--text-secondary); }
+.idea-card-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.idea-card-preview {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.idea-card.expanded .idea-card-preview {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  white-space: pre-wrap;
+}
+.idea-card-actions {
+  display: none;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  gap: 8px;
+}
+.idea-card.expanded .idea-card-actions {
+  display: flex;
+}
+.btn-edit, .btn-delete {
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.btn-edit {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+.btn-edit:hover { background: var(--gold-bg); border-color: var(--gold-soft); color: var(--gold); }
+.btn-delete {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+.btn-delete:hover { background: #fdf0ef; border-color: #f0c4c0; color: var(--danger); }
+.btn-edit:focus-visible, .btn-delete:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+.empty-state p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,36,22,0.4);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+}
+.modal h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 3px rgba(184,134,11,0.1);
+}
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.55;
+}
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239a8d7e' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+.btn-cancel {
+  padding: 10px 20px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-cancel:hover { background: var(--bg); }
+.btn-save {
+  padding: 10px 24px;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-save:hover { background: var(--gold-light); }
+.btn-cancel:focus-visible, .btn-save:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Confirm dialog */
+.confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,36,22,0.4);
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+.confirm-overlay.active { display: flex; }
+.confirm-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 28px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+.confirm-box p {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.btn-confirm-delete {
+  padding: 10px 20px;
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-confirm-delete:hover { background: var(--danger-hover); }
+.btn-confirm-delete:focus-visible, .btn-confirm-cancel:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.btn-confirm-cancel {
+  padding: 10px 20px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.7rem; }
+  .toolbar { flex-direction: column; }
+  .search-input, .filter-select, .btn-new { width: 100%; }
+  .modal { padding: 20px; }
+  .idea-card { padding: 16px; }
+  .idea-card-title { font-size: 1.15rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1><span>Divine</span> Ideas</h1>
+  <p>Capturing inspirations as they come</p>
+  <div class="header-stats" aria-live="polite">
+    <strong id="idea-count">0</strong> ideas captured
+  </div>
+</header>
+
+<main class="container">
+  <div class="toolbar" role="search">
+    <input type="text" class="search-input" id="search-input" placeholder="Search ideas..." aria-label="Search ideas">
+    <select class="filter-select" id="filter-category" aria-label="Filter by category">
+      <option value="">All Categories</option>
+      <option value="Social Media">Social Media</option>
+      <option value="YouTube Videos">YouTube Videos</option>
+      <option value="Bible Reading">Bible Reading</option>
+      <option value="Songs/Music">Songs/Music</option>
+      <option value="Ministry">Ministry</option>
+      <option value="Other">Other</option>
+    </select>
+    <button class="btn-new" id="btn-new" aria-label="Add new idea">+ New Idea</button>
+  </div>
+
+  <div class="ideas-list" id="ideas-list" role="list" aria-label="Ideas"></div>
+</main>
+
+<!-- Add / Edit modal -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <h2 id="modal-title">New Idea</h2>
+    <form id="idea-form" novalidate>
+      <input type="hidden" id="form-id">
+      <div class="form-group">
+        <label for="form-title">Title</label>
+        <input type="text" id="form-title" required placeholder="What's the idea?">
+      </div>
+      <div class="form-group">
+        <label for="form-category">Category</label>
+        <select id="form-category" required>
+          <option value="">Choose a category</option>
+          <option value="Social Media">Social Media</option>
+          <option value="YouTube Videos">YouTube Videos</option>
+          <option value="Bible Reading">Bible Reading</option>
+          <option value="Songs/Music">Songs/Music</option>
+          <option value="Ministry">Ministry</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="form-description">Description</label>
+        <textarea id="form-description" placeholder="Describe the inspiration..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" id="btn-cancel">Cancel</button>
+        <button type="submit" class="btn-save">Save Idea</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete confirm -->
+<div class="confirm-overlay" id="confirm-overlay" role="alertdialog" aria-modal="true" aria-labelledby="confirm-text">
+  <div class="confirm-box">
+    <p id="confirm-text">Delete this idea? This cannot be undone.</p>
+    <div class="confirm-actions">
+      <button class="btn-confirm-cancel" id="btn-confirm-cancel">Keep It</button>
+      <button class="btn-confirm-delete" id="btn-confirm-delete">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var STORAGE_KEY = 'divine-ideas';
+  var SEED_KEY = 'divine-ideas-seeded';
+
+  var SEED_IDEAS = [
+    {
+      id: genId(),
+      title: 'Church Revival Social Media Campaign',
+      category: 'Social Media',
+      description: 'Create content sharing statistics about declining church attendance and how people are suffering from the lack of Christian community. Highlight the power of social media to connect people and plug them into local churches. The ultimate goal is to spark and lead people in the U.S. toward revival.',
+      date: new Date().toISOString()
+    },
+    {
+      id: genId(),
+      title: 'Spiritual Battle YouTube Series',
+      category: 'YouTube Videos',
+      description: 'Produce YouTube videos based on fighting spiritual battles. Incorporate original songs and music into the videos to make them engaging and spirit-filled.',
+      date: new Date(Date.now() - 86400000).toISOString()
+    },
+    {
+      id: genId(),
+      title: 'Bible Reading Follow-Along',
+      category: 'Bible Reading',
+      description: 'Create straight Bible reading videos that viewers can follow along with. Simple, pure Scripture reading — letting the Word speak for itself.',
+      date: new Date(Date.now() - 172800000).toISOString()
+    }
+  ];
+
+  function genId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  function loadIdeas() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* ignore */ }
+    return null;
+  }
+
+  function saveIdeas(ideas) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(ideas));
+    } catch (e) { /* ignore */ }
+  }
+
+  function seedIfNeeded() {
+    try {
+      if (localStorage.getItem(SEED_KEY)) return;
+      var existing = loadIdeas();
+      if (!existing || existing.length === 0) {
+        saveIdeas(SEED_IDEAS);
+      }
+      localStorage.setItem(SEED_KEY, '1');
+    } catch (e) { /* ignore */ }
+  }
+
+  function formatDate(iso) {
+    try {
+      var d = new Date(iso);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // State
+  var ideas = [];
+  var expandedId = null;
+  var deleteTargetId = null;
+
+  // DOM
+  var listEl = document.getElementById('ideas-list');
+  var countEl = document.getElementById('idea-count');
+  var searchInput = document.getElementById('search-input');
+  var filterSelect = document.getElementById('filter-category');
+  var btnNew = document.getElementById('btn-new');
+  var modalOverlay = document.getElementById('modal-overlay');
+  var modalTitle = document.getElementById('modal-title');
+  var form = document.getElementById('idea-form');
+  var formId = document.getElementById('form-id');
+  var formTitle = document.getElementById('form-title');
+  var formCategory = document.getElementById('form-category');
+  var formDescription = document.getElementById('form-description');
+  var btnCancel = document.getElementById('btn-cancel');
+  var confirmOverlay = document.getElementById('confirm-overlay');
+  var btnConfirmCancel = document.getElementById('btn-confirm-cancel');
+  var btnConfirmDelete = document.getElementById('btn-confirm-delete');
+
+  function getFiltered() {
+    var query = searchInput.value.toLowerCase().trim();
+    var cat = filterSelect.value;
+    return ideas.filter(function(idea) {
+      if (cat && idea.category !== cat) return false;
+      if (query) {
+        var haystack = (idea.title + ' ' + idea.description).toLowerCase();
+        if (haystack.indexOf(query) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function render() {
+    var filtered = getFiltered();
+    countEl.textContent = ideas.length;
+
+    if (filtered.length === 0) {
+      var msg = ideas.length === 0
+        ? 'No ideas yet. Tap <strong>+ New Idea</strong> to begin.'
+        : 'No ideas match your search.';
+      listEl.innerHTML = '<div class="empty-state"><p>' + msg + '</p></div>';
+      return;
+    }
+
+    var html = '';
+    for (var i = 0; i < filtered.length; i++) {
+      var idea = filtered[i];
+      var isExpanded = idea.id === expandedId;
+      html += '<article class="idea-card' + (isExpanded ? ' expanded' : '') + '" role="listitem" data-id="' + idea.id + '" tabindex="0" aria-expanded="' + isExpanded + '">'
+        + '<div class="idea-card-header">'
+        + '<div class="idea-card-title">' + escapeHtml(idea.title) + '</div>'
+        + '</div>'
+        + '<div class="idea-card-meta">'
+        + '<span class="category-badge" data-cat="' + escapeHtml(idea.category) + '">' + escapeHtml(idea.category) + '</span>'
+        + '<span class="idea-card-date">' + formatDate(idea.date) + '</span>'
+        + '</div>'
+        + '<div class="idea-card-preview">' + escapeHtml(idea.description) + '</div>'
+        + '<div class="idea-card-actions">'
+        + '<button class="btn-edit" data-action="edit" data-id="' + idea.id + '" aria-label="Edit idea">Edit</button>'
+        + '<button class="btn-delete" data-action="delete" data-id="' + idea.id + '" aria-label="Delete idea">Delete</button>'
+        + '</div>'
+        + '</article>';
+    }
+    listEl.innerHTML = html;
+  }
+
+  // Card click to expand/collapse
+  listEl.addEventListener('click', function(e) {
+    var actionBtn = e.target.closest('[data-action]');
+    if (actionBtn) {
+      e.stopPropagation();
+      var action = actionBtn.getAttribute('data-action');
+      var id = actionBtn.getAttribute('data-id');
+      if (action === 'edit') openEdit(id);
+      else if (action === 'delete') openConfirmDelete(id);
+      return;
+    }
+    var card = e.target.closest('.idea-card');
+    if (!card) return;
+    var cardId = card.getAttribute('data-id');
+    expandedId = expandedId === cardId ? null : cardId;
+    render();
+  });
+
+  listEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      var card = e.target.closest('.idea-card');
+      if (card && e.target === card) {
+        e.preventDefault();
+        var cardId = card.getAttribute('data-id');
+        expandedId = expandedId === cardId ? null : cardId;
+        render();
+        var next = listEl.querySelector('[data-id="' + cardId + '"]');
+        if (next) next.focus();
+      }
+    }
+  });
+
+  // Search & filter
+  searchInput.addEventListener('input', render);
+  filterSelect.addEventListener('change', render);
+
+  // Open new idea modal
+  btnNew.addEventListener('click', function() {
+    formId.value = '';
+    formTitle.value = '';
+    formCategory.value = '';
+    formDescription.value = '';
+    modalTitle.textContent = 'New Idea';
+    openModal();
+  });
+
+  function openEdit(id) {
+    var idea = ideas.find(function(i) { return i.id === id; });
+    if (!idea) return;
+    formId.value = idea.id;
+    formTitle.value = idea.title;
+    formCategory.value = idea.category;
+    formDescription.value = idea.description;
+    modalTitle.textContent = 'Edit Idea';
+    openModal();
+  }
+
+  function openModal() {
+    modalOverlay.classList.add('active');
+    formTitle.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  btnCancel.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  // Save
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var title = formTitle.value.trim();
+    var category = formCategory.value;
+    var description = formDescription.value.trim();
+    if (!title || !category) return;
+
+    var editId = formId.value;
+    if (editId) {
+      for (var i = 0; i < ideas.length; i++) {
+        if (ideas[i].id === editId) {
+          ideas[i].title = title;
+          ideas[i].category = category;
+          ideas[i].description = description;
+          break;
+        }
+      }
+    } else {
+      ideas.unshift({
+        id: genId(),
+        title: title,
+        category: category,
+        description: description,
+        date: new Date().toISOString()
+      });
+    }
+
+    saveIdeas(ideas);
+    closeModal();
+    expandedId = null;
+    render();
+  });
+
+  // Delete confirm
+  function openConfirmDelete(id) {
+    deleteTargetId = id;
+    confirmOverlay.classList.add('active');
+    btnConfirmDelete.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeConfirm() {
+    confirmOverlay.classList.remove('active');
+    deleteTargetId = null;
+    document.body.style.overflow = '';
+  }
+
+  btnConfirmCancel.addEventListener('click', closeConfirm);
+  confirmOverlay.addEventListener('click', function(e) {
+    if (e.target === confirmOverlay) closeConfirm();
+  });
+
+  btnConfirmDelete.addEventListener('click', function() {
+    if (!deleteTargetId) return;
+    ideas = ideas.filter(function(i) { return i.id !== deleteTargetId; });
+    saveIdeas(ideas);
+    expandedId = null;
+    closeConfirm();
+    render();
+  });
+
+  // Escape key closes modals
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (confirmOverlay.classList.contains('active')) closeConfirm();
+      else if (modalOverlay.classList.contains('active')) closeModal();
+    }
+  });
+
+  // Init
+  seedIfNeeded();
+  ideas = loadIdeas() || [];
+  ideas.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+  render();
+})();
+</script>
+</body>
+</html>
